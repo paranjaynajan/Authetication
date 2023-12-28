@@ -1,0 +1,331 @@
+<div
+  style="
+    display: grid;
+    background: linear-gradient(45deg, #e77781 50%, #d9d9e0 50%);
+
+  "
+>
+  <div
+    class="Box"
+    style="display: flex; flex-direction: column;align-items: center; justify-content: center;"
+  >
+ 
+      <div
+      class="maindiv"
+        style="
+          background-color: #fee2e2;
+          border-radius: 5%;
+          box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0px 20px 0px 20px;
+          "
+        >
+          <img
+      
+            alt="Angular Logo"
+            style="filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.5))"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+          />
+        </div>
+        <div class="p-lg-25 p-sm-15 p-md-15">
+          <div
+          class="heading"
+            style="
+              font-family: 'Libre Franklin';
+             
+            "
+          >
+            Register!
+          </div>
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label style="font-family: 'Libre Franklin'; font-weight: 200"
+                >Name</label
+              >
+              <div class="input-group input-group-lg">
+                <span
+                  class="input-group-text"
+                  [ngStyle]="{
+                    'border-color':
+                      profileForm.get('name')?.dirty &&
+                      profileForm.get('name')?.invalid
+                        ? 'red'
+                        : '#ccc'
+                  }"
+                  id="inputGroup-sizing-lg"
+                  >🙎🏻</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngStyle]="{
+                    'border-color':
+                      profileForm.get('name')?.dirty &&
+                      profileForm.get('name')?.invalid
+                        ? 'red'
+                        : '#ccc'
+                  }"
+                  formControlName="name"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-lg"
+                />
+              </div>
+              <div style="height: 8px">
+                <div
+                  *ngIf="
+                    profileForm.get('name')?.dirty &&
+                    profileForm.get('name')?.invalid
+                  "
+                >
+                  <span
+                    class="error-message"
+                    style="
+                      font-family: 'Libre Franklin';
+                      font-weight: 100;
+                      font-size: smaller;
+                      padding-left: 1px;
+                    "
+                    >Name is required</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label style="font-family: 'Libre Franklin'; font-weight: 200"
+                >Email</label
+              >
+              <div class="input-group input-group-lg">
+                <span
+                  class="input-group-text"
+                  [ngStyle]="{
+                    'border-color': profileForm
+                      .get('email')
+                      ?.hasError('pattern')
+                      ? 'red'
+                      : '#ccc'
+                  }"
+                  id="inputGroup-sizing-lg"
+                  >✉️</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngStyle]="{
+                    'border-color': profileForm
+                      .get('email')
+                      ?.hasError('pattern')
+                      ? 'red'
+                      : '#ccc'
+                  }"
+                  formControlName="email"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-lg"
+                />
+              </div>
+              <div style="height: 8px">
+                <div *ngIf="profileForm.get('email')?.hasError('pattern')">
+                  <span
+                    class="error-message"
+                    style="
+                      font-family: 'Libre Franklin';
+                      font-weight: 100;
+                      font-size: smaller;
+                      padding-left: 1px;
+                    "
+                    >Email is invalid.</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label style="font-family: 'Libre Franklin'; font-weight: 200"
+                >Phone</label
+              >
+              <div class="input-group input-group-lg">
+                <span
+                  class="input-group-text"
+                  [ngStyle]="{
+                    'border-color': profileForm
+                      .get('phone')
+                      ?.hasError('minlength')
+                      ? 'red'
+                      : '#ccc'
+                  }"
+                  id="inputGroup-sizing-lg"
+                  >📞</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngStyle]="{
+                    'border-color': profileForm
+                      .get('phone')
+                      ?.hasError('minlength')
+                      ? 'red'
+                      : '#ccc'
+                  }"
+                  formControlName="phone"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-lg"
+                />
+              </div>
+              <div style="height: 8px">
+                <div *ngIf="profileForm.get('phone')?.hasError('minlength')">
+                  <span
+                    class="error-message"
+                    style="
+                      font-family: 'Libre Franklin';
+                      font-weight: 100;
+                      font-size: smaller;
+                      padding-left: 1px;
+                    "
+                    >Must have 10 digits .</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label style="font-family: 'Libre Franklin'; font-weight: 200"
+                >Password</label
+              >
+              <div class="input-group input-group-lg">
+                <span
+                  class="input-group-text"
+                  style="cursor: pointer"
+                  (click)="togglePasswordVisibility()"
+                  [ngStyle]="{
+                    'border-color': profileForm
+                      .get('password')
+                      ?.hasError('pattern')
+                      ? 'red'
+                      : '#ccc'
+                  }"
+                  id="inputGroup-sizing-lg"
+                  >{{ VisibilityPassword ? "🔒" : "🔓" }}</span
+                >
+                <input
+                  [type]="VisibilityPassword ? 'password' : 'text'"
+                  class="form-control"
+                  formControlName="password"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-lg"
+                />
+              </div>
+              <div style="height: 8px">
+                <div *ngIf="profileForm.get('password')?.hasError('password')">
+                  <span
+                    style="
+                      font-family: 'Libre Franklin';
+                      font-weight: 100;
+                      font-size: smaller;
+                      padding-left: 1px;
+                    "
+                    class="error-message"
+                    >{{ validationForPassword }}</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label style="font-family: 'Libre Franklin'; font-weight: 200"
+                >Confirm Password</label
+              >
+              <div class="input-group input-group-lg">
+                <span
+                  class="input-group-text"
+                  style="cursor: pointer"
+                  (click)="toggleConfirmPasswordVisibility()"
+                  [ngStyle]="{
+                    'border-color': profileForm
+                      .get('confirmPassword')
+                      ?.hasError('minlength')
+                      ? 'red'
+                      : '#ccc'
+                  }"
+                  id="inputGroup-sizing-lg"
+                  >{{ VisibilityConfirmPassword ? "🔒" : "🔓" }}</span
+                >
+                <input
+                  [type]="VisibilityConfirmPassword ? 'password' : 'text'"
+                  class="form-control"
+                  formControlName="confirmPassword"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-lg"
+                />
+              </div>
+              <div style="height: 8px">
+                <div
+                  *ngIf="
+                    profileForm
+                      .get('confirmPassword')
+                      ?.hasError('passwordMismatch')
+                  "
+                >
+                  <span
+                    style="
+                      font-family: 'Libre Franklin';
+                      font-weight: 100;
+                      font-size: smaller;
+                      padding-left: 1px;
+                    "
+                    class="error-message"
+                    >Password must match</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+            class="register-button"
+              style="display: flex; justify-content: center; "
+            >
+              <button
+                type="submit"
+                [disabled]="profileForm.invalid"
+                class="btn btn-danger btn-lg"
+                style="padding: 8px 0px; width: 100%"
+              >
+                Register
+              </button>
+            </div>
+            <div style="text-align: center; margin: 15px 0px">
+              <label
+                style="
+                  font-family: 'Libre Franklin';
+                  font-weight: 200;
+                  text-align: center;
+                "
+                >Already have an Account ?
+              </label>
+              <span
+                style="
+                  font-family: 'Libre Franklin';
+                  font-weight: 500;
+                  text-decoration: underline;
+                  text-align: center;
+                  cursor: pointer;
+                "
+                routerLink="/login"
+                >Login</span
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+      <div
+      style="height: 50px; width:30% text-align: center;margin-left:auto ;margin-right: auto;margin-top:20px"
+    >
+      <div *ngIf="displayError" class="alert alert-secondary" role="alert">
+        {{ msg }}
+      </div>
+    </div>
+  </div>
+ 
+</div>

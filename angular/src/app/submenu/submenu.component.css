@@ -1,0 +1,22 @@
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid white;  
+  }
+
+  .dialog{
+      display: none;
+      position: relative;
+      background-color: white;
+      border-radius: 5%;
+      color: black;
+    
+  }
+
+@media screen and (max-width:1024px) {
+    .dialog{
+        width: 380px;
+    }
+}

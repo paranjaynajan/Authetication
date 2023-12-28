@@ -1,0 +1,165 @@
+<nav class="sticky-top">
+  <div class="mainBox" style="position: relative">
+    <div class="container-fluid" style="padding: 0px 25px">
+      <div class="row">
+        <div class="col">
+          <img
+            class="image"
+            alt="Angular Logo"
+            style="filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.5))"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+          />
+        </div>
+        <div class="col" id="middleDiv"></div>
+        <div class="col">
+          <div class="nav-list">
+            <div class="items">
+              <div class="item" id="home" style="display: relative">
+                Home
+                <div style="position: absolute; top: 66px; right: 10px">
+                  <app-submenu />
+                </div>
+              </div>
+              <div class="item" id="products" style="display: relative">
+                Products
+                <div style="position: absolute; top: 66px; right: 18px">
+                  <app-submenu />
+                </div>
+              </div>
+              <div class="item" id="contact" style="display: relative">
+                Contact
+                <div style="position: absolute; top: 66px; right: 18px">
+                  <app-submenu />
+                </div>
+              </div>
+              <div class="item" id="profile">
+                <div style="position: relative">
+                  <img
+                    src="../assets/user.jpg"
+                    style="border-radius: 50%"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                </div>
+                <div style="position: absolute; top: 70px; right: 1px">
+                  <app-submenu width="150px" height="100px">
+                    <div >
+                      <div style="height: 40px; display: flex;justify-content: center;align-items: center;">
+                        User
+                      </div>
+                      <button
+                        type="submit"
+                        class="btn btn-danger btn-lg"
+                        style="padding: 8px 0px; width: 100%"
+                        (click)="userLogout()"
+                      >
+                        Log Out
+                      </button>
+                    </div>
+                  </app-submenu>
+                </div>
+              </div>
+            </div>
+            <div class="menu" (click)="toggle()" style="cursor: pointer">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                class="svg"
+                viewBox="0,0,256,256"
+                style="fill: #ffffff"
+              >
+                <g
+                  fill="#ffffff"
+                  fill-rule="nonzero"
+                  stroke="none"
+                  stroke-width="1"
+                  stroke-linecap="butt"
+                  stroke-linejoin="miter"
+                  stroke-miterlimit="10"
+                  stroke-dasharray=""
+                  stroke-dashoffset="0"
+                  font-family="none"
+                  font-weight="none"
+                  font-size="none"
+                  text-anchor="none"
+                  style="mix-blend-mode: normal"
+                >
+                  <g transform="scale(5.12,5.12)">
+                    <path
+                      d="M5,8c-0.72127,-0.0102 -1.39216,0.36875 -1.75578,0.99175c-0.36361,0.623 -0.36361,1.39351 0,2.01651c0.36361,0.623 1.0345,1.00195 1.75578,0.99175h40c0.72127,0.0102 1.39216,-0.36875 1.75578,-0.99175c0.36361,-0.623 0.36361,-1.39351 0,-2.01651c-0.36361,-0.623 -1.0345,-1.00195 -1.75578,-0.99175zM5,23c-0.72127,-0.0102 -1.39216,0.36875 -1.75578,0.99175c-0.36361,0.623 -0.36361,1.39351 0,2.01651c0.36361,0.623 1.0345,1.00195 1.75578,0.99175h40c0.72127,0.0102 1.39216,-0.36875 1.75578,-0.99175c0.36361,-0.623 0.36361,-1.39351 0,-2.01651c-0.36361,-0.623 -1.0345,-1.00195 -1.75578,-0.99175zM5,38c-0.72127,-0.0102 -1.39216,0.36875 -1.75578,0.99175c-0.36361,0.623 -0.36361,1.39351 0,2.01651c0.36361,0.623 1.0345,1.00195 1.75578,0.99175h40c0.72127,0.0102 1.39216,-0.36875 1.75578,-0.99175c0.36361,-0.623 0.36361,-1.39351 0,-2.01651c-0.36361,-0.623 -1.0345,-1.00195 -1.75578,-0.99175z"
+                    ></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="dropdown"
+    [ngStyle]="{ 'display': dropdown ? 'block' : 'none' }"
+  
+    style="
+      position: absolute;
+      width: 100vw;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+    "
+  >
+    <ul class="list-group" style="">
+      <li
+        class="list-group-items"
+        style="display: flex; border-bottom: 0.5px solid red"
+      >
+        <div style="font-size: 30px">🏡</div>
+        <div style="margin-left: 10px; margin-top: 10px">Home</div>
+      </li>
+      <li
+        class="list-group-items"
+        style="display: flex; border-bottom: 0.5px solid red"
+      >
+        <div style="font-size: 30px">🛒</div>
+        <div style="margin-left: 10px; margin-top: 10px">Products</div>
+      </li>
+      <li
+        class="list-group-items"
+        style="display: flex; border-bottom: 0.5px solid red"
+      >
+        <div style="font-size: 30px">📧</div>
+        <div style="margin-left: 10px; margin-top: 10px">Contact Us</div>
+      </li>
+      <li
+        class="list-group-items"
+        style="display: flex;justify-content: space-between; border-bottom: 0.5px solid red;margin-top: 10px;"
+      >
+      
+        <div style="display: flex;">
+          <img
+            height="40"
+            src="../assets/user.jpg"
+            style="border-radius: 50%"
+            class="card-img-top"
+            alt="..."
+          />
+          <div style="margin-left: 10px; margin-top: 10px">User</div>
+        </div>
+     <div>
+
+      <button
+      type="submit"
+      class="btn btn-danger btn-md"
+      style="padding: 3px 3px; margin-top: 5px; margin-right: 5px;"
+      (click)="userLogout()"
+    >
+      Log Out
+    </button>
+
+     </div>
+       
+      </li>
+    </ul>
+    <div></div>
+  </div>
+</nav>

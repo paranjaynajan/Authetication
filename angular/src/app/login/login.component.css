@@ -1,0 +1,41 @@
+input.ng-dirty.ng-invalid:focus{
+    border: 1px solid red;
+}
+.form-control:focus {
+    box-shadow: none ;
+}
+.logindiv{
+    padding: 10px 70px;
+}
+
+
+@media screen  and (max-width:425px){
+    .logindiv{
+        padding:7px 25px;
+    }
+    img{
+        width: 70px;
+    }
+    .heading{
+        font-size: 22px!important;
+    }
+    
+    .maindiv{
+        padding: auto;
+    }
+}
+@media screen  and (max-width:768px){
+    .logindiv{
+        padding:7px 25px !important;
+    }
+    img{
+        width: 90px;
+    }
+    .heading{
+        font-size: 25px!important;
+    }
+   
+    .maindiv{
+        padding: 10px 14px !important;
+    }
+}

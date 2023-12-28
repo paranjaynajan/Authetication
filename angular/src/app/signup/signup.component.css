@@ -1,0 +1,76 @@
+input.ng-dirty.ng-invalid:focus{
+    border: 1px solid red;
+}
+.form-control:focus {
+    box-shadow: none ;
+}
+.maindiv{
+    width: 450px;
+    padding: 15px 50px;
+ 
+}
+img{
+    width: 120px;
+}
+.heading{
+    font-weight: 400;
+    font-size: 30px;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px){
+    img {
+      width: 90px;
+    }
+  
+    .heading {
+      font-size: 25px;
+    }
+  
+    .maindiv {
+      padding: 17px 30px;
+      width: 400px;
+    }
+}
+  .register-button{
+    margin-top: 40px;
+} 
+
+
+.Box{
+    height: 100vh;
+    padding-top: 10px;
+}
+@media screen and (max-height: 700px) { 
+    .register-button{
+        margin-top: 15px;
+    } 
+    .Box{
+        overflow: scroll;
+        height: auto;
+    }
+    img {
+        width: 70px;
+    
+      }
+
+    .heading {
+        font-size: 18px;
+      }
+} 
+@media screen and (max-width: 425px ) {
+       
+    img {
+      width: 70px;
+    }
+    
+   
+  
+    .maindiv {
+      padding: 5px 25px;
+      width: 320px;
+    }
+  }
+  
+  
+  
