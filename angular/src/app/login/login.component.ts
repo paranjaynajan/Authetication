@@ -19,7 +19,7 @@ export class LoginComponent {
   ) {}
   displayError = false;
   msg = '';
-  toggleIcon = '✉️';
+  toggleIcon = true;
   visibility = true;
   validatorForEmailOrPhone = '';
   data = {};
@@ -35,7 +35,7 @@ export class LoginComponent {
           if (parseInt(control.value)) {
             if (!/^\d{10}$/.test(control.value)) {
               this.validatorForEmailOrPhone = 'Phone must be 10 digit number';
-              this.toggleIcon = '📞';
+              this.toggleIcon = false;
               return { control: true };
             } else {
               return null;
@@ -47,7 +47,7 @@ export class LoginComponent {
               )
             ) {
               this.validatorForEmailOrPhone = 'Enter a valid email';
-              this.toggleIcon = '✉️';
+              this.toggleIcon = true;
               return { control: true };
             } else {
               return null;
@@ -133,17 +133,3 @@ export class LoginComponent {
     } 
   }
 }
-
-// const handleChangeForEmail_Phone = (val: string) => {
-//   if (parseInt(val)) {
-//     setLoginForm(form => ({ ...form, mobileNumber: val }))
-//     setToggleValidation(true);
-
-//   } else {
-//     setLoginForm(form => ({ ...form, email: val }))
-//     setToggleValidation(false);
-
-//   }
-
-// }
-// [Validators.required, Validators.pattern(/^(?:[_a-z0-9-]+)(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/)]

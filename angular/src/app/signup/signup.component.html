@@ -49,18 +49,17 @@
                 >Name</label
               >
               <div class="input-group input-group-lg">
-                <span
-                  class="input-group-text"
-                  [ngStyle]="{
-                    'border-color':
-                      profileForm.get('name')?.dirty &&
-                      profileForm.get('name')?.invalid
-                        ? 'red'
-                        : '#ccc'
-                  }"
-                  id="inputGroup-sizing-lg"
-                  >🙎🏻</span
-                >
+
+                <div  [ngStyle]="{
+                  'border-color':
+                    profileForm.get('name')?.dirty &&
+                    profileForm.get('name')?.invalid
+                      ? 'red'
+                      : '#ccc'
+                }"
+                style="display: flex;justify-content: center;align-items: center; padding: 10px 10px;background-color:#f8f9fa;border-top-left-radius:7px ;border-bottom-left-radius:7px; border:1px solid rgb(204, 204, 204) ;    ">
+                  <img src='../../assets/svg/user.svg'  style="object-fit: fill; height: 30px; width: 30px;"/>
+                  </div>
                 <input
                   type="text"
                   class="form-control"
@@ -101,18 +100,21 @@
                 >Email</label
               >
               <div class="input-group input-group-lg">
-                <span
-                  class="input-group-text"
-                  [ngStyle]="{
-                    'border-color': profileForm
-                      .get('email')
-                      ?.hasError('pattern')
-                      ? 'red'
-                      : '#ccc'
-                  }"
-                  id="inputGroup-sizing-lg"
-                  >✉️</span
-                >
+
+                <div  [ngStyle]="{
+                  'border-color': profileForm
+                    .get('email')
+                    ?.hasError('pattern')
+                    ? 'red'
+                    : '#ccc'
+                }"
+                style="display: flex;justify-content: center;align-items: center; padding: 10px 10px;background-color:#f8f9fa;border-top-left-radius:7px ;border-bottom-left-radius:7px; border:1px solid rgb(204, 204, 204) ;    ">
+                  <img src= '../../assets/svg/email.svg'  style="object-fit: fill; height: 30px; width: 30px;"/>
+                  </div>
+
+
+               
+                
                 <input
                   type="text"
                   class="form-control"
@@ -148,18 +150,17 @@
                 >Phone</label
               >
               <div class="input-group input-group-lg">
-                <span
-                  class="input-group-text"
-                  [ngStyle]="{
-                    'border-color': profileForm
-                      .get('phone')
-                      ?.hasError('minlength')
-                      ? 'red'
-                      : '#ccc'
-                  }"
-                  id="inputGroup-sizing-lg"
-                  >📞</span
-                >
+                <div [ngStyle]="{
+                  'border-color': profileForm
+                    .get('phone')
+                    ?.hasError('minlength')
+                    ? 'red'
+                    : '#ccc'
+                }"
+                style="display: flex;justify-content: center;align-items: center; padding: 10px 10px;background-color:#f8f9fa;border-top-left-radius:7px ;border-bottom-left-radius:7px; border:1px solid rgb(204, 204, 204) ;    ">
+                  <img src='../../assets/svg/phone.svg' style="object-fit: fill; height: 30px; width: 30px;"/>
+                  </div>
+              
                 <input
                   type="text"
                   class="form-control"
@@ -196,20 +197,21 @@
                 >Password</label
               >
               <div class="input-group input-group-lg">
-                <span
-                  class="input-group-text"
-                  style="cursor: pointer"
-                  (click)="togglePasswordVisibility()"
-                  [ngStyle]="{
-                    'border-color': profileForm
-                      .get('password')
-                      ?.hasError('pattern')
-                      ? 'red'
-                      : '#ccc'
-                  }"
-                  id="inputGroup-sizing-lg"
-                  >{{ VisibilityPassword ? "🔒" : "🔓" }}</span
-                >
+
+
+                <div (click)="togglePasswordVisibility()"
+                [ngStyle]="{
+                  'border-color': profileForm
+                    .get('password')
+                    ?.hasError('pattern')
+                    ? 'red'
+                    : '#ccc'
+                }"
+                style="display: flex;justify-content: center;align-items: center; padding: 10px 10px;background-color:#f8f9fa;border-top-left-radius:7px
+                 ;border-bottom-left-radius:7px; border:1px solid rgb(204, 204, 204) ;   cursor: pointer; ">
+                    <img [src]="VisibilityPassword ? '../../assets/svg/lock.svg' : '../../assets/svg/unlock.svg'" style="object-fit: fill; height: 30px; width: 30px;"/>
+                    </div>
+
                 <input
                   [type]="VisibilityPassword ? 'password' : 'text'"
                   class="form-control"
@@ -238,20 +240,19 @@
                 >Confirm Password</label
               >
               <div class="input-group input-group-lg">
-                <span
-                  class="input-group-text"
-                  style="cursor: pointer"
-                  (click)="toggleConfirmPasswordVisibility()"
-                  [ngStyle]="{
-                    'border-color': profileForm
-                      .get('confirmPassword')
-                      ?.hasError('minlength')
-                      ? 'red'
-                      : '#ccc'
-                  }"
-                  id="inputGroup-sizing-lg"
-                  >{{ VisibilityConfirmPassword ? "🔒" : "🔓" }}</span
-                >
+                <div (click)="toggleConfirmPasswordVisibility()"
+                   
+                [ngStyle]="{
+                  'border-color': profileForm
+                    .get('confirmPassword')
+                    ?.hasError('minlength')
+                    ? 'red'
+                    : '#ccc'
+                }"
+                style="display: flex;justify-content: center;align-items: center; padding: 10px 10px;background-color:#f8f9fa;border-top-left-radius:7px
+                 ;border-bottom-left-radius:7px; border:1px solid rgb(204, 204, 204) ;   cursor: pointer; ">
+                    <img [src]="VisibilityConfirmPassword ? '../../assets/svg/lock.svg' : '../../assets/svg/unlock.svg'" style="object-fit: fill; height: 30px; width: 30px;"/>
+                    </div>
                 <input
                   [type]="VisibilityConfirmPassword ? 'password' : 'text'"
                   class="form-control"

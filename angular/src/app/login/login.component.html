@@ -11,9 +11,9 @@
                 <div class="mb-3">
                     <label style="font-family:'Libre Franklin'; font-weight:200 ;">Email/Phone</label>
                     <div class="input-group input-group-lg">
-                        <span class="input-group-text"
-                        [ngStyle]="{'border-color': profileForm.get('email')?.hasError('control') ? 'red' : '#ccc'}"
-                        id="inputGroup-sizing-lg">{{toggleIcon}}</span>
+                        <div [ngStyle]="{'border-color': profileForm.get('email')?.hasError('control') ? 'red' : '#ccc'}" style="display: flex;justify-content: center;align-items: center; padding: 10px 12px;background-color:#f8f9fa;border-top-left-radius:7px ;border-bottom-left-radius:7px; border:1px solid rgb(204, 204, 204) ;    ">
+                        <img [src]="toggleIcon ? '../../assets/svg/email.svg' : '../../assets/svg/phone.svg'" style="object-fit: fill; height: 30px; width: 30px;"/>
+                        </div>
                         <input type="text"  class='form-control' 
                         [ngStyle]="{'border-color': profileForm.get('email')?.hasError('control') ? 'red' : '#ccc'}"
     
@@ -32,10 +32,13 @@
                     <div class="input-group input-group-lg ">
     
                         
-                                <span  class="input-group-text" style="cursor: pointer;" (click)=" toggleVisibility()"
+
+                                <div (click)=" toggleVisibility()" 
                                 [ngStyle]="{'border-color': profileForm.get('password')?.hasError('minlength') ? 'red' : '#ccc'}"
-                                id="inputGroup-sizing-lg">{{visibility?'🔒':'🔓'}}</span>
-                             
+                                style="display: flex;justify-content: center;align-items: center; padding: 10px 12px;background-color:#f8f9fa;border-top-left-radius:7px
+                                 ;border-bottom-left-radius:7px; border:1px solid rgb(204, 204, 204) ;   cursor: pointer; ">
+                                    <img [src]="visibility ? '../../assets/svg/lock.svg' : '../../assets/svg/unlock.svg'" style="object-fit: fill; height: 30px; width: 30px;"/>
+                                    </div>
                         
                     
                         <input  [type]="visibility? 'password':'text'" class="form-control" 
