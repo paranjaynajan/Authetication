@@ -121,7 +121,7 @@
   :host ::ng-deep #home:hover .dialog{
     display: block;
   }
-  :host ::ng-deep #products:hover .dialog{
+  :host ::ng-deep #poll:hover .dialog{
     display: block;
   }
   :host ::ng-deep #contact:hover .dialog{
