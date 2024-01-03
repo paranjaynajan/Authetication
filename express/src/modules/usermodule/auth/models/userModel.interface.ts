@@ -9,7 +9,7 @@ export interface I_usermodel {
   state:string;
   pin:string;
   age:string;
-  dob: string;
+  dob: Date;
   adharnumber:string;
   phone: string;
   image?: null;

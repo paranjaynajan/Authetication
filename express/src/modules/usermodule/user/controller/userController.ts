@@ -43,7 +43,12 @@ export const updateDetails = asyncMiddleware(
     if (error) {
       return res.status(400).send(error.details[0].message);
     }
-    const updateUser = userModel.findByIdAndUpdate(value.id, value);
+  //  console.log(value.id,'vallll');
+  //  const up =await  userModel.findOne({_id:value.id})
+  //  console.log(up,'upppps')
+
+    const updateUser =await  userModel.findOneAndUpdate({_id:value.id}, value,{new:true});
+
     if (!updateUser) {
       res.clearCookie("refreshToken");
       return res.status(400).send({ msg: "user Not found" });

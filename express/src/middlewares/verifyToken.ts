@@ -27,7 +27,7 @@ export const verifyToken = (async(req: Request, res: Response,next:NextFunction)
       next()
     }catch(err){
      console.log('jumping here')
-      res.status(403).send()
+      res.status(403).send({msg:"token expired"})
     }
      
           
