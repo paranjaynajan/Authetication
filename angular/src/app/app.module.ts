@@ -11,7 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SubmenuComponent } from './submenu/submenu.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
-import { ProductsComponent } from './layout/products/products.component';
+import { PollComponent } from './layout/poll/poll.component';
 import { HomeComponent } from './layout/home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { CarosuleComponent } from './components/carosule/carosule.component';
@@ -36,7 +36,7 @@ import { Apiservice } from './utils/api.service';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ProductsComponent,
+    PollComponent,
 
   ],
   providers: [

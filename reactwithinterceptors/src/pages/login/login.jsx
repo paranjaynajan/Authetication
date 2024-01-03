@@ -23,11 +23,20 @@ import Home from "../homepage/home";
 import ErrorBoundary from "../error/error";
 import AuthContext from "../../utils/provider";
 import { Navigate } from "react-router-dom";
+import { createWorker } from 'tesseract.js';
+import Tesseract from "tesseract.js";
+
 
 export default function Login() {
   const { auth, setAuth } = useContext(AuthContext);
-  const nav = useNavigate();
 
+  const [recognizedText, setRecognizedText] = useState('');
+
+  const nav = useNavigate();
+  const { TesseractWorker } = Tesseract;
+  const worker = new TesseractWorker();
+  
+   
   const BoxStyling = {
     display: "flex",
     justifyContent: "center",
@@ -50,7 +59,26 @@ export default function Login() {
     setAuth(response.data.token)
     nav("/home");
   };
+useEffect(()=>{
 
+},[])
+const handleImageUpload = (event) => {
+  const imageFile = event.target.files[0]
+  if (imageFile) {
+    
+    worker.recognize(imageFile)
+      .then((result) => {
+        setRecognizedText(result.data.text);
+      })
+      .catch((error) => {
+        console.error('OCR Error:', error);
+      })
+      .finally(() => {
+        worker.terminate(); 
+      });
+  }
+
+};
   return (
     <>
       <div>
@@ -171,7 +199,8 @@ export default function Login() {
             </Formik>
           </Box>
         </Box>
-    
+    <input type="file" onChange={handleImageUpload}/>
+    {recognizedText}
       </div>
     </>
   );

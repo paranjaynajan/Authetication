@@ -4,13 +4,13 @@ import { ColDef } from 'ag-grid-community';
 
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
+  selector: 'app-poll',
+  templateUrl: './poll.component.html',
   standalone: true,
   imports: [AgGridModule], 
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./poll.component.css']
 })
-export class ProductsComponent {
+export class PollComponent {
 getImage(value:string){
   
   return`<img src=${value} alt="image" />`

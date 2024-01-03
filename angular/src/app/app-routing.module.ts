@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { HomeComponent } from './layout/home/home.component';
 import { LayoutComponent } from './layout/layout.component';
-import { ProductsComponent } from './layout/products/products.component';
+import { PollComponent } from './layout/poll/poll.component';
 import { LoginComponent } from './login/login.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
@@ -51,8 +51,8 @@ const routes: Routes = [
         component:HomeComponent
       },
   {
-    path:"product",
-    component:ProductsComponent
+    path:"poll",
+    component:PollComponent
   }
     ],
   },

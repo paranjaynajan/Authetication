@@ -8,6 +8,6 @@ authRouter.post("/otpverify",otpVerify)
 authRouter.post("/resetpassword",resetPassword)
 authRouter.post("/changepassword",changePassword)
 authRouter.get('/refresh-token',requestRefreshToken)
-// authRouter.get("/signout",userSignOut)
+
 
 export default authRouter
