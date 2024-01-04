@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Router } from "@angular/router";
 import { Apiservice } from "src/app/utils/api.service";
 import * as Tesseract from "tesseract.js";
@@ -12,6 +12,13 @@ import { createWorker } from "tesseract.js";
 })
 export class HomeComponent {
   constructor(private http: Apiservice, private route: Router) {}
+  showModal=true 
+  
+ handleModalClose(){
+  this.showModal=false
+ }
+
+
   getInfo(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0];

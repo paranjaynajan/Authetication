@@ -1,9 +1,20 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { asyncMiddleware } from "../../../../middlewares/asyncMiddleware";
 import refreshTokenModel from "../../auth/models/refreshTokenModel";
 import jwt from "jsonwebtoken";
-import { validationUserUpdate } from "../validations/validationUserUpdate";
+import {
+  validationUserUpdate,
+  validationUserUpdateAdhar,
+} from "../validations/validationUserUpdate";
 import userModel from "../../auth/models/userModel";
+import { object } from "joi";
+import { I_user } from "../../auth/validations/userValidation.interface";
+import {
+  I_userUpdateData,
+  I_usermodel,
+} from "../../auth/models/userModel.interface";
+import { error } from "console";
+import { ObjectId } from "mongoose";
 
 export const updatePassword = () => {};
 
@@ -37,23 +48,82 @@ export const userSignOut = asyncMiddleware(
   }
 );
 
-export const updateDetails = asyncMiddleware(
-  async (req: Request, res: Response): Promise<Response> => {
-    const { error, value } = validationUserUpdate(req.body);
-    if (error) {
-      return res.status(400).send(error.details[0].message);
+export const userMe = asyncMiddleware(
+  async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response> => {
+    const user = await findUserWithPayload(req.headers.authorization);
+    if (!user) {
+      return res.status(400).send({ msg: "User not found" });
     }
-  //  console.log(value.id,'vallll');
-  //  const up =await  userModel.findOne({_id:value.id})
-  //  console.log(up,'upppps')
-
-    const updateUser =await  userModel.findOneAndUpdate({_id:value.id}, value,{new:true});
-
-    if (!updateUser) {
-      res.clearCookie("refreshToken");
-      return res.status(400).send({ msg: "user Not found" });
-    }
-    return res.status(200).send({ msg: updateUser });
+    return res.status(200).send({ user });
   }
 );
-export const userMe = () => {};
+
+const findUserWithPayload = async (
+  header: any
+): Promise<string | I_userUpdateData> => {
+  try {
+    const userToken = header.split(" ");
+
+    const payload = await jwt.verify(userToken[1], `${process.env.SECRETEKEY}`);
+    if (typeof payload !== "object") {
+      throw new Error("error verifying");
+    }
+    const user = await userModel.findOne({ _id: payload.id });
+    if (!user) {
+      return "user not found";
+    }
+    console.log(user);
+    return user;
+  } catch (error) {
+    throw new Error("something went wrong");
+  }
+};
+
+export const updateDetails = asyncMiddleware(
+  async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response> => {
+    const user = await findUserWithPayload(req.headers.authorization);
+    if (typeof user === "string") {
+      return res.status(200).send({ msg: "User not found" });
+    }
+    if (!user) {
+      res.clearCookie("refreshToken");
+      return res.status(400).send({ msg: "user not found" });
+    }
+    const check = user?.isUpdated;
+    if (!check) {
+      const { value, error } = validationUserUpdate(req.body);
+      if (error) {
+        return res.status(400).send({ msg: error.message });
+      }
+      const updateUser = await userModel.findOneAndUpdate(
+        { _id: user?._id },
+        { ...value, isUpdated: true },
+        { new: true }
+      );
+      return res.status(200).send({ msg: updateUser });
+    } else if (req.body.adharnumber || req.body.dob) {
+      return res
+        .status(400)
+        .send({ msg: "DOB and AdharNumber cannot be updated." });
+    } else {
+      const { value, error } = validationUserUpdateAdhar(req.body);
+      if (error) {
+        return res.status(400).send({ msg: error.message });
+      }
+      const updateUser = await userModel.findOneAndUpdate(
+        { _id: user?._id },
+        { ...value, isUpdated: true },
+        { new: true }
+      );
+      return res.status(200).send({ msg: updateUser });
+    }
+  }
+);

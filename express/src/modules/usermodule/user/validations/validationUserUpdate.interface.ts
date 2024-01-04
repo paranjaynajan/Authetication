@@ -1,5 +1,6 @@
 export interface I_userUpdate {
-  id:string,
+  name: string;
+  phone: string;
   lastname: string,
   fathersname: string,
   address: {
@@ -12,3 +13,4 @@ export interface I_userUpdate {
   adharnumber:string,
   // image: string;
 }
+export interface I_userUpdateAdhar extends Omit<I_userUpdate,'adharnumber'&'dob'&'age'>{}

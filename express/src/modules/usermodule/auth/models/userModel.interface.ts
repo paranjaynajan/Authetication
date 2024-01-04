@@ -1,4 +1,7 @@
+import mongoose, { ObjectId } from "mongoose";
+
 export interface I_usermodel {
+
   email: string;
   password: string;
   name: string;
@@ -16,4 +19,8 @@ export interface I_usermodel {
   role: string;
   createdAt: string;
   updatedAt: string;
+  isUpdated: boolean;
+}
+export interface I_userUpdateData extends I_usermodel {
+  _id?:mongoose.Types.ObjectId;
 }

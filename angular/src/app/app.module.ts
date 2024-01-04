@@ -16,6 +16,7 @@ import { HomeComponent } from './layout/home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { CarosuleComponent } from './components/carosule/carosule.component';
 import { Apiservice } from './utils/api.service';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { Apiservice } from './utils/api.service';
     HomeComponent,
     PagenotfoundComponent,
     CarosuleComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
