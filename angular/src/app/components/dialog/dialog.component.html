@@ -1,6 +1,6 @@
 
 
-  <div  *ngIf="isOpen" class="modal-wrapper" (click)="handleClose()">
+  <div  *ngIf="isOpen" class="modal-wrapper sticky-top"  (click)="handleClose()">
     <div class="modal1"  (click)="$event.stopPropagation()">
         <div class="open">  
             <ng-content></ng-content>
