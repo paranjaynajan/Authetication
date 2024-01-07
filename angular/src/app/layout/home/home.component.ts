@@ -30,6 +30,7 @@ export class HomeComponent {
   validationForPassword = "";
   VisibilityPassword = true;
   VisibilityConfirmPassword = true;
+  src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
   data = {};
   handleModalClose() {
     this.showModal = false;
@@ -80,12 +81,31 @@ export class HomeComponent {
     password: ["", [Validators.required, Validators.minLength(8)]],
   });
 
+  loadFile(event:Event){
+    const fileInput = event.target as HTMLInputElement;
+    const file = fileInput?.files?.[0];
+    if (file) {
+  this.src= URL.createObjectURL(file);
+    }
+
+  }
+ prevScreen(){
+
+  this.updatepassword=this.updatepassword-1
+  console.log(this.updatepassword,"next")
+ }
+ nextScreen(){
+
+  this.updatepassword=this.updatepassword+1
+  console.log(this.updatepassword,"next")
+ }
   getInfo(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0];
     if (file) {
       Tesseract.recognize(file, "eng", { logger: console.log }).then(
         ({ data: { text } }) => {
+          console.log(text,"text")
           this.getDateOfBirth(text);
         }
       );

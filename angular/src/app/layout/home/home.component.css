@@ -1,7 +1,7 @@
 .updateForm {
   display: flex;
   justify-content: center;
-  height: 650px;
+  height: 720px;
   width: 100%;
 }
 .leftdiv {
@@ -10,8 +10,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.updatepassword {
+  min-height: 602px;
+}
+.updateadhar{
+  min-height: 602px;
+}
+
 .rightdiv {
   width: 500px;
+  
   border-left: 0px solid #e77781;
   padding-left: 10px;
   /* overflow-y: scroll; */

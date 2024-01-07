@@ -8,10 +8,10 @@
     <div class="updateForm">
       <div class="leftdiv">
         <div class="profile-pic">
-          <label class="-label" for="file"> Change Image </label>
-          <input id="file" type="file" onchange="loadFile(event)" />
+          <label class="-label" for="file">  <span > <img/></span> Change Image </label>
+          <input id="file" type="file" (change)="loadFile($event)" />
           <img
-            src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
+            src={{src}}
             id="output"
             width="200"
           />
@@ -434,8 +434,8 @@
               </div>
             </div>
           </div>
-          <div *ngSwitchCase="2">
-            <div>
+          <div *ngSwitchCase="2" class="updateadhar">
+            <div >
               <div class="mb-3">
                 <label style="font-family: 'Libre Franklin'; font-weight: 200"
                   >Aadhar Number</label
@@ -612,194 +612,208 @@
                 
               </div>
               <div style="margin-top: 20px;">
-                <input type="file"  style="display: none;"  #fileupload />
+                <input type="file"  style="display: none;"  type="file" (change)="getInfo($event)" #fileupload />
                 
-                <button type="submit"   (click)="fileupload.click()" (change)="getInfo($event)"
+                <button type="submit"   (click)="fileupload.click()" 
                    class="btn btn-danger btn-lg" style="padding: 8px 0px;width: 100%;" >Upload Adhar</button>
               </div>
             </div>
           
           </div>
           <div *ngSwitchCase="3">
-            <div class="mb-3">
-              <label style="font-family: 'Libre Franklin'; font-weight: 200"
-                >Current Password</label
-              >
-              <div class="input-group input-group-lg">
-                <div
-                  (click)="togglePasswordVisibility()"
-                  [ngStyle]="{
-                    'border-color': profileForm
-                      .get('password')
-                      ?.hasError('pattern')
-                      ? 'red'
-                      : '#ccc'
-                  }"
-                  style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 10px 10px;
-                    background-color: #f8f9fa;
-                    border-top-left-radius: 7px;
-                    border-bottom-left-radius: 7px;
-                    border: 1px solid rgb(204, 204, 204);
-                    cursor: pointer;
-                  "
+            <div class="updatepassword">
+              <div  class="mb-3">
+                <label style="font-family: 'Libre Franklin'; font-weight: 200"
+                  >Current Password</label
                 >
-                  <img
-                    [src]="
-                      VisibilityPassword
-                        ? '../../assets/svg/lock.svg'
-                        : '../../assets/svg/unlock.svg'
+                <div class="input-group input-group-lg">
+                  <div
+                    (click)="togglePasswordVisibility()"
+                    [ngStyle]="{
+                      'border-color': profileForm
+                        .get('password')
+                        ?.hasError('pattern')
+                        ? 'red'
+                        : '#ccc'
+                    }"
+                    style="
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      padding: 10px 10px;
+                      background-color: #f8f9fa;
+                      border-top-left-radius: 7px;
+                      border-bottom-left-radius: 7px;
+                      border: 1px solid rgb(204, 204, 204);
+                      cursor: pointer;
                     "
-                    style="object-fit: fill; height: 30px; width: 30px"
+                  >
+                    <img
+                      [src]="
+                        VisibilityPassword
+                          ? '../../assets/svg/lock.svg'
+                          : '../../assets/svg/unlock.svg'
+                      "
+                      style="object-fit: fill; height: 30px; width: 30px"
+                    />
+                  </div>
+  
+                  <input
+                    [type]="VisibilityPassword ? 'password' : 'text'"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-lg"
                   />
                 </div>
-
-                <input
-                  [type]="VisibilityPassword ? 'password' : 'text'"
-                  class="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-lg"
-                />
+                <div style="height: 8px">
+                  <div *ngIf="profileForm.get('password')?.hasError('password')">
+                    <span
+                      style="
+                        font-family: 'Libre Franklin';
+                        font-weight: 100;
+                        font-size: smaller;
+                        padding-left: 1px;
+                      "
+                      class="error-message"
+                      >{{ validationForPassword }}</span
+                    >
+                  </div>
+                </div>
               </div>
-              <div style="height: 8px">
-                <div *ngIf="profileForm.get('password')?.hasError('password')">
-                  <span
+              <div class="mb-3">
+                <label style="font-family: 'Libre Franklin'; font-weight: 200"
+                  >New Password</label
+                >
+                <div class="input-group input-group-lg">
+                  <div
+                    (click)="toggleConfirmPasswordVisibility()"
+                    [ngStyle]="{
+                      'border-color': profileForm
+                        .get('confirmPassword')
+                        ?.hasError('minlength')
+                        ? 'red'
+                        : '#ccc'
+                    }"
                     style="
-                      font-family: 'Libre Franklin';
-                      font-weight: 100;
-                      font-size: smaller;
-                      padding-left: 1px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      padding: 10px 10px;
+                      background-color: #f8f9fa;
+                      border-top-left-radius: 7px;
+                      border-bottom-left-radius: 7px;
+                      border: 1px solid rgb(204, 204, 204);
+                      cursor: pointer;
                     "
-                    class="error-message"
-                    >{{ validationForPassword }}</span
                   >
+                    <img
+                      [src]="
+                        VisibilityConfirmPassword
+                          ? '../../assets/svg/lock.svg'
+                          : '../../assets/svg/unlock.svg'
+                      "
+                      style="object-fit: fill; height: 30px; width: 30px"
+                    />
+                  </div>
+                  <input
+                    [type]="VisibilityConfirmPassword ? 'password' : 'text'"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-lg"
+                  />
+                </div>
+                <div style="height: 8px">
+                  <div
+                    *ngIf="
+                      profileForm
+                        .get('confirmPassword')
+                        ?.hasError('passwordMismatch')
+                    "
+                  >
+                    <span
+                      style="
+                        font-family: 'Libre Franklin';
+                        font-weight: 100;
+                        font-size: smaller;
+                        padding-left: 1px;
+                      "
+                      class="error-message"
+                      >Password must match</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label style="font-family: 'Libre Franklin'; font-weight: 200"
+                  >Password</label
+                >
+                <div class="input-group input-group-lg">
+                  <div
+                    (click)="togglePasswordVisibility()"
+                    [ngStyle]="{
+                      'border-color': profileForm
+                        .get('password')
+                        ?.hasError('pattern')
+                        ? 'red'
+                        : '#ccc'
+                    }"
+                    style="
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      padding: 10px 10px;
+                      background-color: #f8f9fa;
+                      border-top-left-radius: 7px;
+                      border-bottom-left-radius: 7px;
+                      border: 1px solid rgb(204, 204, 204);
+                      cursor: pointer;
+                    "
+                  >
+                    <img
+                      [src]="
+                        VisibilityPassword
+                          ? '../../assets/svg/lock.svg'
+                          : '../../assets/svg/unlock.svg'
+                      "
+                      style="object-fit: fill; height: 30px; width: 30px"
+                    />
+                  </div>
+  
+                  <input
+                    [type]="VisibilityPassword ? 'password' : 'text'"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-lg"
+                  />
+                </div>
+                <div style="height: 8px">
+                  <div *ngIf="profileForm.get('password')?.hasError('password')">
+                    <span
+                      style="
+                        font-family: 'Libre Franklin';
+                        font-weight: 100;
+                        font-size: smaller;
+                        padding-left: 1px;
+                      "
+                      class="error-message"
+                      >{{ validationForPassword }}</span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="mb-3">
-              <label style="font-family: 'Libre Franklin'; font-weight: 200"
-                >New Password</label
-              >
-              <div class="input-group input-group-lg">
-                <div
-                  (click)="toggleConfirmPasswordVisibility()"
-                  [ngStyle]="{
-                    'border-color': profileForm
-                      .get('confirmPassword')
-                      ?.hasError('minlength')
-                      ? 'red'
-                      : '#ccc'
-                  }"
-                  style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 10px 10px;
-                    background-color: #f8f9fa;
-                    border-top-left-radius: 7px;
-                    border-bottom-left-radius: 7px;
-                    border: 1px solid rgb(204, 204, 204);
-                    cursor: pointer;
-                  "
-                >
-                  <img
-                    [src]="
-                      VisibilityConfirmPassword
-                        ? '../../assets/svg/lock.svg'
-                        : '../../assets/svg/unlock.svg'
-                    "
-                    style="object-fit: fill; height: 30px; width: 30px"
-                  />
-                </div>
-                <input
-                  [type]="VisibilityConfirmPassword ? 'password' : 'text'"
-                  class="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-lg"
-                />
-              </div>
-              <div style="height: 8px">
-                <div
-                  *ngIf="
-                    profileForm
-                      .get('confirmPassword')
-                      ?.hasError('passwordMismatch')
-                  "
-                >
-                  <span
-                    style="
-                      font-family: 'Libre Franklin';
-                      font-weight: 100;
-                      font-size: smaller;
-                      padding-left: 1px;
-                    "
-                    class="error-message"
-                    >Password must match</span
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="mb-3">
-              <label style="font-family: 'Libre Franklin'; font-weight: 200"
-                >Password</label
-              >
-              <div class="input-group input-group-lg">
-                <div
-                  (click)="togglePasswordVisibility()"
-                  [ngStyle]="{
-                    'border-color': profileForm
-                      .get('password')
-                      ?.hasError('pattern')
-                      ? 'red'
-                      : '#ccc'
-                  }"
-                  style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 10px 10px;
-                    background-color: #f8f9fa;
-                    border-top-left-radius: 7px;
-                    border-bottom-left-radius: 7px;
-                    border: 1px solid rgb(204, 204, 204);
-                    cursor: pointer;
-                  "
-                >
-                  <img
-                    [src]="
-                      VisibilityPassword
-                        ? '../../assets/svg/lock.svg'
-                        : '../../assets/svg/unlock.svg'
-                    "
-                    style="object-fit: fill; height: 30px; width: 30px"
-                  />
-                </div>
-
-                <input
-                  [type]="VisibilityPassword ? 'password' : 'text'"
-                  class="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-lg"
-                />
-              </div>
-              <div style="height: 8px">
-                <div *ngIf="profileForm.get('password')?.hasError('password')">
-                  <span
-                    style="
-                      font-family: 'Libre Franklin';
-                      font-weight: 100;
-                      font-size: smaller;
-                      padding-left: 1px;
-                    "
-                    class="error-message"
-                    >{{ validationForPassword }}</span
-                  >
-                </div>
-              </div>
-            </div>
+ 
+          </div>
+        </div>
+        <div style="margin: 17px 0px 10px 0px;display: flex;justify-content: space-between;">
+          <div >
+            <button type="submit"   [disabled]="updatepassword == 1" (click)="prevScreen()" 
+               class="btn btn-danger btn-lg" style="padding: 8px 8px;width: 100%;" >Previous</button>
+          </div>
+    
+          <div >
+            <button type="submit"   (click)="nextScreen()"   [disabled]="updatepassword == 3"
+               class="btn btn-danger btn-lg" style="padding: 8px 8px;width: 100%;" >Next</button>
           </div>
         </div>
       </div>

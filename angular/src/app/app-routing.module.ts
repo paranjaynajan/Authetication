@@ -47,7 +47,7 @@ const routes: Routes = [
      canActivate:[TokenGuard],
     children: [
       {
-        path:"home",
+        path:"",
         component:HomeComponent
       },
   {
