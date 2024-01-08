@@ -99,10 +99,9 @@
     </div>
   </div>
   <div
-    class="dropdown"
-    [ngStyle]="{ 'display': dropdownMenu ? 'block' : 'none' }"
-  
-    style="
+  class="dropdown"
+  *ngIf="dropdownMenu"
+  style="
       position: absolute;
       width: 100%;
       box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;

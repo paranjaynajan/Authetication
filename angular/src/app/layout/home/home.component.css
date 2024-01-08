@@ -12,10 +12,10 @@
 }
 
 .updatepassword {
-  min-height: 602px;
+  min-height: 606px;
 }
 .updateadhar{
-  min-height: 602px;
+  min-height: 606px;
 }
 
 .rightdiv {
@@ -36,6 +36,7 @@
 .head{
     margin-left: 10px;
     margin-right: 10px;
+    cursor: pointer;
 }
 .dobage{
     display: flex;
@@ -85,6 +86,8 @@
   height: 200px;
   width: 200px;
 }
+
+
 
 .-label {
   display: flex;

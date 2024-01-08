@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { asyncMiddleware } from "../../../../middlewares/asyncMiddleware";
 import refreshTokenModel from "../../auth/models/refreshTokenModel";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import {
   validationUserUpdate,
   validationUserUpdateAdhar,
@@ -15,8 +16,33 @@ import {
 } from "../../auth/models/userModel.interface";
 import { error } from "console";
 import { ObjectId } from "mongoose";
+import { validationChangePassword } from "../validations/validationUpdatePassword";
 
-export const updatePassword = () => {};
+export const updatePassword = asyncMiddleware(
+  async (req: Request, res: Response): Promise<Response> => {
+    const { error, value } = validationChangePassword(req.body);
+    if (error) {
+      return res.status(404).send(error.details[0].message);
+    }
+    const user = await findUserWithPayload(req.headers.authorization);
+    if (typeof user === "string") {
+      return res.status(200).send({ msg: "User not found" });
+    }
+    if (await bcrypt.compare(value.oldpassword, user.password)) {
+      const { newpassword } = value;
+
+      const epassword = await bcrypt.hash(newpassword, 12);
+      const updateUserPassword = await userModel.findOneAndUpdate(
+        { _id: user?._id },
+        {password: epassword},
+        { new: true }
+      );
+      return res.status(200).send({ msg: "Password updated" });
+    } else {
+      return res.status(400).send({ msg: "Invalid Credentials" });
+    }
+  }
+);
 
 export const userSignOut = asyncMiddleware(
   async (req: Request, res: Response): Promise<Response> => {
@@ -127,3 +153,6 @@ export const updateDetails = asyncMiddleware(
     }
   }
 );
+
+
+export const profileUpdate=() => {}

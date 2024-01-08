@@ -23,7 +23,6 @@
           <div class="head" (click)="showdetails(1)">User's Details</div>
           <div
             class="head"
-           
             (click)="showdetails(2)"
           >
             Aadhar Card
@@ -37,7 +36,7 @@
           </div>
         </div>
         <div [ngSwitch]="updatepassword">
-          <div *ngSwitchCase="1">
+          <div *ngSwitchCase="1" >
             <div class="mb-3">
               <label style="font-family: 'Libre Franklin'; font-weight: 200"
                 >Name</label
@@ -110,8 +109,9 @@
                 <div
                   [ngStyle]="{
                     'border-color':
-                      profileForm.get('name')?.dirty &&
-                      profileForm.get('name')?.invalid
+                      profileForm.get('
+                      lastname')?.dirty &&
+                      profileForm.get('lastname')?.invalid
                         ? 'red'
                         : '#ccc'
                   }"
@@ -133,11 +133,12 @@
                 </div>
                 <input
                   type="text"
+                  formControlName="lastname"
                   class="form-control"
                   [ngStyle]="{
                     'border-color':
-                      profileForm.get('name')?.dirty &&
-                      profileForm.get('name')?.invalid
+                      profileForm.get('lastname')?.dirty &&
+                      profileForm.get('lastname')?.invalid
                         ? 'red'
                         : '#ccc'
                   }"
@@ -148,8 +149,8 @@
               <div style="height: 8px">
                 <div
                   *ngIf="
-                    profileForm.get('name')?.dirty &&
-                    profileForm.get('name')?.invalid
+                    profileForm.get('lastname')?.dirty &&
+                    profileForm.get('lastname')?.invalid
                   "
                 >
                   <span
@@ -173,8 +174,8 @@
                 <div
                   [ngStyle]="{
                     'border-color':
-                      profileForm.get('name')?.dirty &&
-                      profileForm.get('name')?.invalid
+                      profileForm.get('fathersname')?.dirty &&
+                      profileForm.get('fathersname')?.invalid
                         ? 'red'
                         : '#ccc'
                   }"
@@ -199,20 +200,21 @@
                   class="form-control"
                   [ngStyle]="{
                     'border-color':
-                      profileForm.get('name')?.dirty &&
-                      profileForm.get('name')?.invalid
+                      profileForm.get('fathersname')?.dirty &&
+                      profileForm.get('fathersname')?.invalid
                         ? 'red'
                         : '#ccc'
                   }"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-lg"
+                  formControlName="fathersname"
                 />
               </div>
               <div style="height: 8px">
                 <div
                   *ngIf="
-                    profileForm.get('name')?.dirty &&
-                    profileForm.get('name')?.invalid
+                    profileForm.get('fathersname')?.dirty &&
+                    profileForm.get('fathersname')?.invalid
                   "
                 >
                   <span
@@ -223,7 +225,7 @@
                       font-size: smaller;
                       padding-left: 1px;
                     "
-                    >last name is required</span
+                    >father's name is required</span
                   >
                 </div>
               </div>
@@ -236,8 +238,8 @@
                 <div
                   [ngStyle]="{
                     'border-color':
-                      profileForm.get('name')?.dirty &&
-                      profileForm.get('name')?.invalid
+                      profileForm.get('phone')?.dirty &&
+                      profileForm.get('phone')?.invalid
                         ? 'red'
                         : '#ccc'
                   }"
@@ -258,12 +260,13 @@
                   />
                 </div>
                 <input
+                formControlName="phone"
                   type="text"
                   class="form-control"
                   [ngStyle]="{
                     'border-color':
-                      profileForm.get('name')?.dirty &&
-                      profileForm.get('name')?.invalid
+                      profileForm.get('phone')?.dirty &&
+                      profileForm.get('phone')?.invalid
                         ? 'red'
                         : '#ccc'
                   }"
@@ -274,8 +277,8 @@
               <div style="height: 8px">
                 <div
                   *ngIf="
-                    profileForm.get('name')?.dirty &&
-                    profileForm.get('name')?.invalid
+                    profileForm.get('phone')?.dirty &&
+                    profileForm.get('phone')?.invalid
                   "
                 >
                   <span
@@ -286,7 +289,7 @@
                       font-size: smaller;
                       padding-left: 1px;
                     "
-                    >last name is required</span
+                    >Phone is required</span
                   >
                 </div>
               </div>
@@ -301,8 +304,8 @@
                   <div
                     [ngStyle]="{
                       'border-color':
-                        profileForm.get('name')?.dirty &&
-                        profileForm.get('name')?.invalid
+                        profileForm.get('address')?.dirty &&
+                        profileForm.get('address')?.invalid
                           ? 'red'
                           : '#ccc'
                     }"
@@ -323,12 +326,13 @@
                     />
                   </div>
                   <input
+                  formControlName="address"
                     type="text"
                     class="form-control"
                     [ngStyle]="{
                       'border-color':
-                        profileForm.get('name')?.dirty &&
-                        profileForm.get('name')?.invalid
+                        profileForm.get('address')?.dirty &&
+                        profileForm.get('address')?.invalid
                           ? 'red'
                           : '#ccc'
                     }"
@@ -339,8 +343,8 @@
                 <div style="height: 8px">
                   <div
                     *ngIf="
-                      profileForm.get('name')?.dirty &&
-                      profileForm.get('name')?.invalid
+                      profileForm.get('address')?.dirty &&
+                      profileForm.get('address')?.invalid
                     "
                   >
                     <span
@@ -351,7 +355,7 @@
                         font-size: smaller;
                         padding-left: 1px;
                       "
-                      >last name is required</span
+                      >Address is required</span
                     >
                   </div>
                 </div>
@@ -365,8 +369,8 @@
                     <div
                       [ngStyle]="{
                         'border-color':
-                          profileForm.get('name')?.dirty &&
-                          profileForm.get('name')?.invalid
+                          profileForm.get('pincode')?.dirty &&
+                          profileForm.get('pincode')?.invalid
                             ? 'red'
                             : '#ccc'
                       }"
@@ -387,12 +391,13 @@
                       />
                     </div>
                     <input
+                    formControlName="pincode"
                       type="text"
                       class="form-control"
                       [ngStyle]="{
                         'border-color':
-                          profileForm.get('name')?.dirty &&
-                          profileForm.get('name')?.invalid
+                          profileForm.get('pincode')?.dirty &&
+                          profileForm.get('pincode')?.invalid
                             ? 'red'
                             : '#ccc'
                       }"
@@ -403,8 +408,8 @@
                   <div style="height: 8px">
                     <div
                       *ngIf="
-                        profileForm.get('name')?.dirty &&
-                        profileForm.get('name')?.invalid
+                        profileForm.get('pincode')?.dirty &&
+                        profileForm.get('pincode')?.invalid
                       "
                     >
                       <span
@@ -415,20 +420,39 @@
                           font-size: smaller;
                           padding-left: 1px;
                         "
-                        >last name is required</span
+                        >Pincode is required</span
                       >
                     </div>
                   </div>
                 </div>
                 <div>
                   <div class="form-floating" style="margin-top: 25px">
-                    <select class="form-select">
-                      <!-- <option selected>Open this select menu</option> -->
+                    <select class="form-select" formControlName="pincode">
+                      
                       <option value="1">Indore</option>
                       <option value="2">Dewas</option>
                       <option value="3">Ujjain</option>
                     </select>
                     <label>City</label>
+                  </div>
+                  <div style="height: 8px">
+                    <div
+                      *ngIf="
+                        profileForm.get('city')?.dirty &&
+                        profileForm.get('city')?.invalid
+                      "
+                    >
+                      <span
+                        class="error-message"
+                        style="
+                          font-family: 'Libre Franklin';
+                          font-weight: 100;
+                          font-size: smaller;
+                          padding-left: 1px;
+                        "
+                        >City is required</span
+                      >
+                    </div>
                   </div>
                 </div>
               </div>

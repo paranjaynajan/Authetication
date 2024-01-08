@@ -19,9 +19,9 @@ export class HomeComponent {
     private postLogin: Apiservice,
     private nav: Router,
     private route: Router
-  ) {}
+  ) { }
   showModal = true;
-  updatepassword=1
+  updatepassword = 1
   displayError = false;
   msg = "";
   toggleIcon = true;
@@ -30,7 +30,7 @@ export class HomeComponent {
   validationForPassword = "";
   VisibilityPassword = true;
   VisibilityConfirmPassword = true;
-  src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
+  src = "https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
   data = {};
   handleModalClose() {
     this.showModal = false;
@@ -45,67 +45,97 @@ export class HomeComponent {
   toggleConfirmPasswordVisibility() {
     this.VisibilityConfirmPassword = !this.VisibilityConfirmPassword;
   }
-  profileForm = this.formBuilder.group({
-    email: [
-      "",
-      Validators.compose([
-        Validators.required,
-        (control) => {
-          if (!control.value) {
-            return null;
-          }
-          if (parseInt(control.value)) {
-            if (!/^\d{10}$/.test(control.value)) {
-              this.validatorForEmailOrPhone = "Phone must be 10 digit number";
-              this.toggleIcon = false;
-              return { control: true };
-            } else {
-              return null;
-            }
-          } else {
-            if (
-              !/^(?:[_a-z0-9-]+)(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/.test(
-                control.value
-              )
-            ) {
-              this.validatorForEmailOrPhone = "Enter a valid email";
-              this.toggleIcon = true;
-              return { control: true };
-            } else {
-              return null;
-            }
-          }
-        },
-      ]),
-    ],
-    password: ["", [Validators.required, Validators.minLength(8)]],
-  });
 
-  loadFile(event:Event){
+  profileForm = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.pattern(/^(?:[_a-z0-9-]+)(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/)]],
+    name: ['', [Validators.required]],
+    lastname: ['', [Validators.required]],
+    fathersname: ['', [Validators.required]],
+    phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+    pincode: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(7)]],
+    city: ['', [Validators.required, Validators.required]],
+    address: ['', [Validators.required]],
+    age:['', [Validators.required, Validators.maxLength(2)]],
+   adharnumber:['', [Validators.required, Validators.maxLength(12),Validators.minLength(12)]],
+    dob: ['',[Validators.required]],
+  });
+  passwordForm=this.formBuilder.group({
+    oldpassword: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', Validators.compose([Validators.required,(password) => {
+      if (!password.value) {
+        return null;
+      }
+      if (password.value.length < 8) {
+        this.validationForPassword='Password must be at least 8 characters long';
+        return { password: true };
+      }
+  
+     
+      if (!/[A-Z]/.test(password.value)) {
+        this.validationForPassword='Password must contain at least one uppercase letter';
+        return { password: true };
+      }
+  
+  
+      if (!/[a-z]/.test(password.value)) {
+        this.validationForPassword= 'Password must contain at least one lowercase letter';
+        return { password: true };
+      }
+  
+  
+      if (!/\d/.test(password.value)) {
+        this.validationForPassword='Password must contain at least one number';
+        return { password: true };
+      }
+  
+    
+      if (!/[!@#$%^&*(),.?":{}|<>]/.test(password.value)) {
+        this.validationForPassword='Password must contain at least one special character';
+        return { password: true };
+      }
+  
+  
+      return null;
+  }])],
+    confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(8), (control) => {
+      const password = control.root.get('password');
+      if (!password) {
+        return null;
+      }
+      if (password.value !== control.value) {
+        return { passwordMismatch: true };
+      }
+      return null;
+    }])],
+  })
+
+  
+
+  loadFile(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0];
     if (file) {
-  this.src= URL.createObjectURL(file);
+      this.src = URL.createObjectURL(file);
     }
 
   }
- prevScreen(){
+  prevScreen() {
 
-  this.updatepassword=this.updatepassword-1
-  console.log(this.updatepassword,"next")
- }
- nextScreen(){
+    this.updatepassword = this.updatepassword - 1
+    console.log(this.updatepassword, "next")
+  }
+  nextScreen() {
 
-  this.updatepassword=this.updatepassword+1
-  console.log(this.updatepassword,"next")
- }
+    this.updatepassword = this.updatepassword + 1
+    console.log(this.updatepassword, "next")
+  }
   getInfo(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0];
     if (file) {
       Tesseract.recognize(file, "eng", { logger: console.log }).then(
         ({ data: { text } }) => {
-          console.log(text,"text")
+          console.log(text, "text")
           this.getDateOfBirth(text);
         }
       );
@@ -139,9 +169,8 @@ export class HomeComponent {
       console.log("No date or number found in the string.");
     }
   }
-  showdetails(val:number){
-    
-    this.updatepassword=val;
+  showdetails(val: number) {
+    this.updatepassword = val;
   }
-  onSubmit() {}
+  onSubmit() { }
 }

@@ -86,7 +86,7 @@ export class LoginComponent {
           next: (value) => {
             const data = value as { [key: string]: string };
             localStorage.setItem('token', data['token']);
-            this.nav.navigateByUrl('/home');
+            this.nav.navigateByUrl('/');
           },
           error: (error: Error | HttpErrorResponse) => {
             this.displayError = true;
@@ -113,7 +113,7 @@ export class LoginComponent {
           next: (value) => {
             const data = value as { [key: string]: string };
             localStorage.setItem('token', data['token']);
-            this.nav.navigateByUrl('/home');
+            this.nav.navigateByUrl('/');
           },
           error: (error: Error | HttpErrorResponse) => {
             this.displayError = true;

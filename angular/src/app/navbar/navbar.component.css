@@ -60,10 +60,10 @@
 
 
 
-.dropdown{
+/* .dropdown{
     overflow: hidden;
     opacity: 1;
-}
+} */
 
 /* .dropdown.open {
 
@@ -97,9 +97,9 @@
         display: block;
         margin-top: 10px
     }
-    .dropdown{
+    /* .dropdown{
         display: block;
-    }
+    } */
     .nav-list{
         display:flex;
         align-items: center;

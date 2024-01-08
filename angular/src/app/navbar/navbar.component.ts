@@ -10,19 +10,20 @@ import { Apiservice } from '../utils/api.service';
 export class NavbarComponent {
   constructor(private nav:Router,private http:Apiservice){}
   dropdownMenu=false
-   @HostListener('window:resize', [])
-  onResize() {
-    if (window.innerWidth < 772 ) {
-    } else {
-      this.dropdownMenu=false
-      console.log('Desktop/tablet device detected');
-    }
-  }
+  //  @HostListener('window:resize', [])
+  // onResize() {
+  //   if (window.innerWidth < 772 ) {
+  //   } else {
+  //     this.dropdownMenu=false
+  //     console.log('Desktop/tablet device detected');
+  //   }
+  // }
  
 
  toggle(){
-   console.log(this.dropdownMenu)
+   
    this.dropdownMenu=!this.dropdownMenu
+   console.log(this.dropdownMenu,"toggle menu")
  }  
 
  userLogout(){

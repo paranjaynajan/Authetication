@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema<I_usermodel>( {
     fathersname:{ type: String,default:""},
     address: {
       city:  { type: String,default:""},
-      state: { type: String,default:""},
+     address: { type: String,default:""},
       pin:  { type: String,default:""}
     },
     age:{ type: String,default:""},
