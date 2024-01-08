@@ -2,20 +2,28 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 
-const a=path.join(__dirname,"../../uploads")
+const pathtofolder=path.join(__dirname,"../../uploads")
 
-console.log(a,"path")
+
 const storage = multer.diskStorage({
   destination: (req, File, cb) => {
-    const profileImageuploadPath = a;
-
+    const profileImageuploadPath = './uploads';
     if (!fs.existsSync(profileImageuploadPath)) {
       fs.mkdirSync(profileImageuploadPath);
     }
+    cb(null, path.join(pathtofolder, '/profileImages'));
   },
-  filename: (req, File, cb) => {},
+  filename: (req, file, callback) => {
+    const filename = `${Date.now()}-${file.originalname}`;
+    callback(null, filename);
+  },
 });
 
 export const fileImage = multer({
   storage: storage,
 });
+
+
+
+
+
