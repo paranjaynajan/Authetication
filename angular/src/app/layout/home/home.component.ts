@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Apiservice } from "src/app/utils/api.service";
@@ -12,37 +12,56 @@ import { createWorker } from "tesseract.js";
   styleUrls: ["./home.component.css"],
   providers: [],
 })
-export class HomeComponent {
+
+export class HomeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private postLogin: Apiservice,
+    private req: Apiservice,
     private nav: Router,
     private route: Router
   ) { }
-  showModal = true;
-  updatepassword = 1
-  displayError = false;
-  msg = "";
-  toggleIcon = true;
-  visibility = true;
-  validatorForEmailOrPhone = "";
-  validationForPassword = "";
-  VisibilityPassword = true;
-  VisibilityConfirmPassword = true;
-  src = "https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
-  data = {};
-  handleModalClose() {
+
+  ngOnInit(): void {
+    const res = this.req.makeRequest('http://localhost:5000/api/user/me', 'GET')
+    res.subscribe({
+      next: (value) => {
+        const data = value as { [key: string]: {} };
+        const user = data['user']
+        const userObject = user as { [key: string]: boolean };
+         this.adharupdate=userObject['isUpdated']
+
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+  buttonText:string=''
+  adharupdate:boolean = false
+  showModal:boolean = true;
+  updatepassword:number = 1
+  displayError:boolean = false;
+  msg:string = "";
+  toggleIcon:boolean = true;
+  visibility:boolean = true;
+  validatorForEmailOrPhone:string = "";
+  validationForPassword:string = "";
+  VisibilityPassword:boolean = true;
+  VisibilityConfirmPassword:boolean = true;
+  src:string = "https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
+
+  handleModalClose():void {
     this.showModal = false;
   }
-  toggleVisibility() {
+  toggleVisibility():void {
     console.log(this.visibility);
     this.visibility = !this.visibility;
   }
-  togglePasswordVisibility() {
+  togglePasswordVisibility():void {
     this.VisibilityPassword = !this.VisibilityPassword;
   }
-  toggleConfirmPasswordVisibility() {
+  toggleConfirmPasswordVisibility():void {
     this.VisibilityConfirmPassword = !this.VisibilityConfirmPassword;
   }
 
@@ -55,48 +74,48 @@ export class HomeComponent {
     pincode: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(7)]],
     city: ['', [Validators.required, Validators.required]],
     address: ['', [Validators.required]],
-    age:['', [Validators.required, Validators.maxLength(2)]],
-   adharnumber:['', [Validators.required, Validators.maxLength(12),Validators.minLength(12)]],
-    dob: ['',[Validators.required]],
+    age: ['', [Validators.required, Validators.maxLength(2)]],
+    adharnumber: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(12)]],
+    dob: ['', [Validators.required]],
   });
-  passwordForm=this.formBuilder.group({
+  passwordForm = this.formBuilder.group({
     oldpassword: ['', [Validators.required, Validators.minLength(8)]],
-    password: ['', Validators.compose([Validators.required,(password) => {
+    password: ['', Validators.compose([Validators.required, (password) => {
       if (!password.value) {
         return null;
       }
       if (password.value.length < 8) {
-        this.validationForPassword='Password must be at least 8 characters long';
+        this.validationForPassword = 'Password must be at least 8 characters long';
         return { password: true };
       }
-  
-     
+
+
       if (!/[A-Z]/.test(password.value)) {
-        this.validationForPassword='Password must contain at least one uppercase letter';
+        this.validationForPassword = 'Password must contain at least one uppercase letter';
         return { password: true };
       }
-  
-  
+
+
       if (!/[a-z]/.test(password.value)) {
-        this.validationForPassword= 'Password must contain at least one lowercase letter';
+        this.validationForPassword = 'Password must contain at least one lowercase letter';
         return { password: true };
       }
-  
-  
+
+
       if (!/\d/.test(password.value)) {
-        this.validationForPassword='Password must contain at least one number';
+        this.validationForPassword = 'Password must contain at least one number';
         return { password: true };
       }
-  
-    
+
+
       if (!/[!@#$%^&*(),.?":{}|<>]/.test(password.value)) {
-        this.validationForPassword='Password must contain at least one special character';
+        this.validationForPassword = 'Password must contain at least one special character';
         return { password: true };
       }
-  
-  
+
+
       return null;
-  }])],
+    }])],
     confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(8), (control) => {
       const password = control.root.get('password');
       if (!password) {
@@ -109,9 +128,9 @@ export class HomeComponent {
     }])],
   })
 
-  
 
-  loadFile(event: Event) {
+
+  loadFile(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
     const file = fileInput?.files?.[0];
     if (file) {
@@ -119,12 +138,12 @@ export class HomeComponent {
     }
 
   }
-  prevScreen() {
+  prevScreen():void {
 
     this.updatepassword = this.updatepassword - 1
     console.log(this.updatepassword, "next")
   }
-  nextScreen() {
+  nextScreen():void {
 
     this.updatepassword = this.updatepassword + 1
     console.log(this.updatepassword, "next")
@@ -172,5 +191,43 @@ export class HomeComponent {
   showdetails(val: number) {
     this.updatepassword = val;
   }
-  onSubmit() { }
+  onSubmitPass() {
+    console.log("Pass")
+  }
+  onSubmitUser() {
+    console.log("User")
+  }
+  
+  buttonTextFun():string {
+    if (this.updatepassword == 1 && this.adharupdate) {
+      this.buttonText='Submit'
+      return 'Submit'
+    } else {
+      if (this.updatepassword == 1 && !this.adharupdate) {
+        this.buttonText='Next'
+        return 'Next'
+      }else if (this.updatepassword == 2 && !this.adharupdate){
+        this.buttonText='Submit'
+        return 'Submit'
+      }else{
+        if (this.updatepassword == 2 && this.adharupdate) {
+          this.buttonText='Next'
+          return 'Next'
+        }else{
+          if(this.updatepassword==3){
+            this.buttonText='Submit'
+            return 'Submit'
+          }else{
+            this.buttonText='Next'
+            return 'Next'
+          }
+        }
+     
+      }
+      
+    }
+  }
+closeModal(){
+  this.showModal=false
 }
+  }

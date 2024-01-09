@@ -1,3 +1,10 @@
+input.ng-dirty.ng-invalid:focus{
+  border: 1px solid red;
+}
+.form-control:focus {
+  box-shadow: none ;
+}
+
 .updateForm {
   display: flex;
   justify-content: center;

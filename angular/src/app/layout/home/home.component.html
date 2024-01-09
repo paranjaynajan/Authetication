@@ -17,7 +17,6 @@
           />
         </div>
       </div>
-
       <div class="rightdiv">
         <div class="headingdiv">
           <div class="head" (click)="showdetails(1)">User's Details</div>
@@ -36,6 +35,7 @@
           </div>
         </div>
         <div [ngSwitch]="updatepassword">
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmitUser()" >
           <div *ngSwitchCase="1" >
             <div class="mb-3">
               <label style="font-family: 'Libre Franklin'; font-weight: 200"
@@ -639,13 +639,16 @@
                 <input type="file"  style="display: none;"  type="file" (change)="getInfo($event)" #fileupload />
                 
                 <button type="submit"   (click)="fileupload.click()" 
-                   class="btn btn-danger btn-lg" style="padding: 8px 0px;width: 100%;" >Upload Adhar</button>
+                   class="btn btn-danger btn-lg" [disabled]="adharupdate" style="padding: 8px 0px;width: 100%;" >Upload Adhar</button>
               </div>
             </div>
           
           </div>
+     </form>
           <div *ngSwitchCase="3">
+            <form [formGroup]="passwordForm" (ngSubmit)="onSubmitPass()" >
             <div class="updatepassword">
+           
               <div  class="mb-3">
                 <label style="font-family: 'Libre Franklin'; font-weight: 200"
                   >Current Password</label
@@ -826,19 +829,22 @@
                 </div>
               </div>
             </div>
- 
+       </form>
           </div>
         </div>
         <div style="margin: 17px 0px 10px 0px;display: flex;justify-content: space-between;">
           <div >
-            <button type="submit"   [disabled]="updatepassword == 1" (click)="prevScreen()" 
-               class="btn btn-danger btn-lg" style="padding: 8px 8px;width: 100%;" >Previous</button>
+            <button type="submit"  (click)="   updatepassword == 1?onSubmitPass():       prevScreen()" 
+               class="btn btn-danger btn-lg" style="padding: 8px 8px;width: 100%;" >{{updatepassword == 1?'Close':'Previous'}}</button>
           </div>
     
           <div >
-            <button type="submit"   (click)="nextScreen()"   [disabled]="updatepassword == 3"
-               class="btn btn-danger btn-lg" style="padding: 8px 8px;width: 100%;" >Next</button>
+            <button type="submit"    (click)="buttonText==='Next'?nextScreen():updatepassword===3? onSubmitPass(): onSubmitUser() " 
+               class="btn btn-danger btn-lg" style="padding: 8px 8px;width: 100%;" >
+               {{buttonTextFun() }}
+         </button>
           </div>
+          
         </div>
       </div>
     </div>
