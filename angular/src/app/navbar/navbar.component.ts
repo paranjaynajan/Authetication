@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apiservice } from '../utils/api.service';
+import endpoints from 'src/utils/apiEndPoints';
 
 @Component({
   selector: 'app-navbar',
@@ -27,11 +28,13 @@ export class NavbarComponent {
  }  
 
  userLogout(){
-  const token = this.http.makeRequest(
-    'http://localhost:5000/api/user/signout',
-    'GET'
+  const { base_url_auth, userLogout } = endpoints;
+  const result = this.http.makeRequest(
+    `${base_url_auth}${userLogout}`,
+    'GET',
   );
-  token.subscribe({
+ ;
+  result.subscribe({
     next: (token) => {
       localStorage.clear();
       this.nav.navigateByUrl('/login');

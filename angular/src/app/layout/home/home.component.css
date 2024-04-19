@@ -4,6 +4,18 @@ input.ng-dirty.ng-invalid:focus{
 .form-control:focus {
   box-shadow: none ;
 }
+/* Hide the spinners for number inputs */
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* Hide the spinners for number inputs */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 
 .updateForm {
   display: flex;
@@ -24,7 +36,9 @@ input.ng-dirty.ng-invalid:focus{
 .updateadhar{
   min-height: 606px;
 }
-
+.form-floating{
+  margin-top: 25px;
+}
 .rightdiv {
   width: 500px;
   
@@ -48,6 +62,10 @@ input.ng-dirty.ng-invalid:focus{
 .dobage{
     display: flex;
     justify-content: space-between;
+}
+.marginClass{
+  margin-bottom: 1rem;
+  font-size:16px;
 }
 .headingdiv {
   display: flex;
@@ -140,6 +158,19 @@ input.ng-dirty.ng-invalid:focus{
     height: 150px;
     width: 150px;
   }
+  .marginClass{
+    margin-bottom: 0.75rem;
+    font-size:12px;
+  }
+  .form-floating{
+    margin-top: 18px;
+  }
+  .updatepassword {
+    min-height:auto;
+  }
+  .updateadhar{
+    min-height: auto;
+  }
 }
 @media screen and (max-width: 500px) {
   .updateForm {
@@ -154,6 +185,7 @@ input.ng-dirty.ng-invalid:focus{
   .head{
     margin-left: 5px;
     margin-right: 5px;
+    font-size: 15px;
 }
   .rightdiv {
     width: 320px;
@@ -167,10 +199,23 @@ input.ng-dirty.ng-invalid:focus{
     height: 120px;
     width: 120px;
   }
+  .marginClass{
+    margin-bottom: 0.75rem;
+    font-size:12px;
+  }
+  .form-floating{
+    margin-top: 18px;
+  }
   .dobage{
     display: block;
     margin-bottom: 10px;
    
+}
+.updatepassword {
+  min-height:auto;
+}
+.updateadhar{
+  min-height: auto;
 }
 }
 @media screen and (max-width: 430px) {
@@ -186,6 +231,7 @@ input.ng-dirty.ng-invalid:focus{
   .head{
     margin-left: 5px;
     margin-right: 5px;
+    font-size: 14px;
 }
 
   .rightdiv {
@@ -200,6 +246,19 @@ input.ng-dirty.ng-invalid:focus{
     height: 100px;
     width: 100px;
   }
+  .marginClass{
+    margin-bottom: 0.75rem;
+    font-size:12px;
+  }
+  .form-floating{
+    margin-top: 18px;
+  }
+  .updatepassword {
+    min-height:auto;
+  }
+  .updateadhar{
+    min-height: auto;
+  }
 }
 @media screen and (max-width: 380px) {
   .updateForm {
@@ -207,16 +266,17 @@ input.ng-dirty.ng-invalid:focus{
     height: 100%;
   }
   .leftdiv {
-    width: 250px;
+    width: 275px;
     display: flex;
     justify-content: center;
   }
   .head{
     margin-left: 5px;
     margin-right: 5px;
+    font-size: 13px;
 }
   .rightdiv {
-    width: 250px;
+    width: 100%;
   }
   .profile-pic img {
     height: 100px;
@@ -226,5 +286,19 @@ input.ng-dirty.ng-invalid:focus{
     cursor: pointer;
     height: 100px;
     width: 100px;
+  }
+  .marginClass{
+    margin-bottom: 0.50rem;
+    font-size:12px;
+  
+  }
+  .updatepassword {
+    min-height:auto;
+  }
+  .updateadhar{
+    min-height: auto;
+  }
+  .form-floating{
+    margin-top: 18px;
   }
 }

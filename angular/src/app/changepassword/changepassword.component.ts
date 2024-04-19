@@ -26,7 +26,6 @@ export class ChangepasswordComponent implements OnInit {
     this.route.params.subscribe((params) => {
       const { token, id } = params;
       this.userId = id;
-      this.userToken = token;
     });
   }
   validationForPassword = '';
@@ -100,15 +99,13 @@ export class ChangepasswordComponent implements OnInit {
     this.VisibilityConfirmPassword = !this.VisibilityConfirmPassword;
   }
   onSubmit() {
-    const { base_url, newpassword } = endpoints;
+    const { base_url_auth, newpassword } = endpoints;
     let userChangPassword = {
       password: this.profileForm.value.password,
-      id: this.userId,
-      token: this.userToken,
     };
     console.log(userChangPassword, 'token', this.userToken);
     const result = this.changePassword.makeRequest(
-      `${base_url}${newpassword}`,
+      `${base_url_auth}${newpassword}`,
       'POST',
       userChangPassword
     );

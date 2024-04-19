@@ -60,7 +60,6 @@ export class LoginComponent {
   });
 
   toggleVisibility() {
-    console.log(this.visibility);
     this.visibility = !this.visibility;
   }
 

@@ -1,0 +1,12 @@
+
+2024-04-16T07:11:08.192Z [error]: MongoParseError: Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
+2024-04-16T07:11:25.112Z [error]: MongoParseError: Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
+2024-04-16T07:11:36.838Z [error]: MongoParseError: Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
+2024-04-18T06:49:28.176Z [error]: Error: User Not Found
+2024-04-18T06:50:41.070Z [error]: Error: User Not Found
+2024-04-18T06:51:18.175Z [error]: Error: User Not Found
+2024-04-18T06:52:08.823Z [error]: Error: User Not Found
+2024-04-18T06:53:56.026Z [error]: Error: User Not Found
+2024-04-18T06:54:34.211Z [error]: Error: User Not Found
+2024-04-18T06:55:09.144Z [error]: Error: User Not Found
+2024-04-18T06:55:43.855Z [error]: Error: User Not Found

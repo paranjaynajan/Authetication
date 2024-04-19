@@ -11,6 +11,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import endpoints from 'src/utils/apiEndPoints';
 interface AnyObj {
   [key: string]: any;
 }
@@ -39,12 +40,10 @@ export class Apiservice implements HttpInterceptor {
     originalRequest: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (error.status === 403) {
-      console.log(error, 'sdasdasdsdsds');
+    if (error.status === 401) {
       const result = this.newAccessToken();
       return result.pipe(
         switchMap((data: AnyObj) => {
-          console.log(data, 'data');
           localStorage.clear();
           localStorage.setItem('token', JSON.stringify(data['token']));
           const retryRequest = originalRequest.clone({
@@ -72,15 +71,19 @@ export class Apiservice implements HttpInterceptor {
   makeRequest<T>(
     url: string,
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
-    data?: object
+    data?: object,
+    headerOptions?: boolean
   ): Observable<T> {
     const accessToken = localStorage.getItem('token');
     const tokenWithBearer = `Bearer ${accessToken}`;
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
+    const headers = headerOptions ?new HttpHeaders({
+     Authorization: tokenWithBearer,
+   }) :new HttpHeaders({
+       'Content-Type': 'application/json',
       Authorization: tokenWithBearer,
     });
+    console.log(headers,data);
     return this.http.request<T>(method, url, {
       body: data,
       headers: headers,
@@ -90,6 +93,7 @@ export class Apiservice implements HttpInterceptor {
 
   private newAccessToken(): Observable<AnyObj> {
     console.log('new aceess token lene jaa');
+    const {base_url,refreshToken}=endpoints
     const accessToken = localStorage.getItem('token');
     const tokenWithBearer = `Bearer ${accessToken}`;
 
@@ -98,7 +102,7 @@ export class Apiservice implements HttpInterceptor {
       Authorization: tokenWithBearer,
     });
     const response = this.http.get<any>(
-      'http://localhost:5000/api/auth/refresh-token',
+      `${base_url}${refreshToken}`,
       { headers: headers, withCredentials: true }
     );
 
