@@ -6,10 +6,12 @@ userLogin:"/signin",
 userSignup:"/signup",
 resetPassword:"/forgot-password",
 otpVerify:"/otpverify",
-newpassword:"/change-password",
+newpassword:"/reset-password",
 userLogout:"/logout",
 imageUpload:"/upload",
-user:"/me"
+user:"/me",
+update:"/update",
+changepassword:"/change-password"
 }
 
 export default endpoints

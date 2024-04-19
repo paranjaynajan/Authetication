@@ -80,8 +80,6 @@ export const requestRefreshTokenController = asyncMiddleware(
     if (refreshTokenAlreadyExists) {
       const payload = jwt.verify(value, `${process.env.REFRESHSECRETEKEY}`);
 
-      console.log(payload,"payload");
-
       if (typeof payload !== "object") {
         throw new Error("Not valid payload");
       }

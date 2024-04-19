@@ -21,6 +21,8 @@ import { createWorker } from "tesseract.js";
   styleUrls: ["./home.component.css"],
   providers: [],
 })
+
+
 export class HomeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +30,13 @@ export class HomeComponent implements OnInit {
     private req: Apiservice,
     private nav: Router,
     private route: Router
-  ) {}
+  ) {
+    const { base_url_auth, user,update,changepassword } = endpoints;
+    this.base_url_auth = base_url_auth;
+    this.user = user
+    this.update=update
+    this.changepassword=changepassword
+  }
 
   ngOnInit(): void {
     this.adhaarForm.get("dob")?.valueChanges.subscribe((dob) => {
@@ -37,8 +45,8 @@ export class HomeComponent implements OnInit {
         this.adhaarForm.get("age")?.setValue(age.toString());
       }
     });
-    const { base_url_auth, user } = endpoints;
-    const res = this.req.makeRequest(`${base_url_auth}${user}`, "GET");
+
+    const res = this.req.makeRequest(`${this.base_url_auth}${this.user}`, "GET");
     res.subscribe({
       next: (value) => {
         const data = value as { [key: string]: {} };
@@ -53,20 +61,26 @@ export class HomeComponent implements OnInit {
           city: user.address.city,
           address: user.address.address,
         });
-        // const userObject = user as { [key: string]: boolean };
-        //  this.adharupdate=userObject['isUpdated']
         this.src = user.image;
+        this.adhaarForm.patchValue({
+          adharnumber: user.adharnumber,
+          age: user.age,
+          dob: user.dob,
+        });
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
-
+  base_url_auth: string="";
+  user: string="";
+  update:string="";
+  changepassword:string="";
   buttonText: string = "";
   adharupdate: boolean = false;
   showModal: boolean = true;
-  updatepassword: number = 1;
+  updatedetals: number = 1;
   displayError: boolean = false;
   msg: string = "";
   toggleIcon: boolean = true;
@@ -94,18 +108,18 @@ export class HomeComponent implements OnInit {
 
   profileForm = this.formBuilder.group({
     name: ["", [Validators.required]],
-    lastname: ["", [Validators.required]],
-    fathersname: ["", [Validators.required]],
+    lastname: ["", ],
+    fathersname: ["", ],
     phone: [
       "",
       [Validators.required, Validators.minLength(10), Validators.maxLength(10)],
     ],
     pincode: [
       "",
-      [Validators.required, Validators.min(1000000), Validators.max(9999999)],
+      [, Validators.min(1000000), Validators.max(9999999)],
     ],
-    city: ["", [Validators.required]],
-    address: ["", [Validators.required]],
+    city: ["", ],
+    address: ["", ],
   });
 
   adhaarForm = this.formBuilder.group({
@@ -235,17 +249,20 @@ export class HomeComponent implements OnInit {
   }
 
   showdetails(val: number) {
-    this.updatepassword = val;
+    this.updatedetals = val;
   }
 
   onSubmitAdhar() {
-    console.log("adhar");
+    console.log(this.adhaarForm,"adhar");
+    const res = this.req.makeRequest(`${this.base_url_auth}${this.update}`, "PUT",this.adhaarForm.value);
   }
 
   onSubmitPass() {
-    console.log("Pass");
+    console.log(this.passwordForm,"Pass");
+    const res = this.req.makeRequest(`${this.base_url_auth}${this.changepassword}`, "PUT",this.passwordForm.value);
   }
   onSubmitUser() {
-    console.log("User");
+    console.log(this.profileForm.value,"User");
+    const res = this.req.makeRequest(`${this.base_url_auth}${this.update}`, "PUT",this.profileForm.value);
   }
 }
